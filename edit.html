@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.6.1/dist/full.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/c3d3cabb8b.js" crossorigin="anonymous"></script>
@@ -36,8 +36,22 @@
 
             <img id="brandLogo" class=" cursor-pointer  lg:w-auto w-44" src="./images/Brandlogo.png" alt="Brand Logo">
 
-            <!-- Search Box -->
+            <!-- Menus -->
 
+            <ul class="flex gap-6">
+                <li><a href="index.html">
+                        <div class="flex flex-col gap-4 text-white justify-center items-center hover:text-yellow-400">
+                            <i class="fa-solid fa-cloud-arrow-up fa-xl"></i>
+                            <p>Upload</p>
+                        </div>
+                    </a></li>
+                <li><a href="edit.html">
+                        <div class="flex flex-col gap-4 text-white justify-center items-center hover:text-yellow-400">
+                            <i class="fa-solid fa-pen-to-square fa-xl"></i>
+                            <p>Edit</p>
+                        </div>
+                    </a></li>
+            </ul>
 
 
             <!-- Down Navbar -->
@@ -45,11 +59,29 @@
 
     </header>
     <main id="main" class="flex flex-col  p-5 gap-6 xl:mx-60">
-        <h1 class="font-bold text-center underline underline-offset-8 text-3xl">Product Upload Form</h1>
+
+        
+
+        <h1 class="font-bold text-center underline underline-offset-8 text-3xl">Edit Products</h1>
+
+        <div class="w-full flex flex-col justify-center items-center gap-5 my-10">
+            <h1 class="text-2xl font-bold">Search For Product Code</h1>
+            <div class="form-control">
+                <div class="input-group">
+                  <input id="searchBar" type="text" placeholder="Search…" class="input input-bordered" />
+                  <button id="searchButton"  class="btn btn-square">
+                    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+                  </button>
+                </div>
+                <label for="searchBar" class="label">
+                    <span id="errorMassage" class="label-text-alt text-red-400"></span>
+                </label>
+              </div>
+        </div>
 
         <div class="flex flex-col lg:flex-row gap-6">
             <div class="flex-1">
-                <div class="form-control w-full max-w-xs">
+                <!-- <div class="form-control w-full max-w-xs">
                     <label for="productImage" class="label">
                         <span class="label-text-alt text-lg font-semibold">Upload your default product image.</span>
                     </label>
@@ -74,13 +106,30 @@
                         accept="image/jpeg, image/png, image/jpg"
                         class="file-input file-input-bordered scale-75 max-w-xs" />
 
+                </div> -->
+
+                <div class="my-5">
+                    <h1 class="text-lg font-bold my-3">Product images</h1>
+                    <div class="flex gap-5">
+                        <div id="imageContainer" class="flex gap-5">
+                            <!-- <div class="w-40 relative">
+                                <img class="rounded-lg" src="./images/ProductDemoImage(1).png" alt="">
+                                <div id="deleteImageButton" class="absolute -bottom-2 -right-2 bg-yellow-400 hover:cursor-pointer rounded-full px-1">
+                                    <i class="fa-solid fa-trash-can" ></i>
+                                </div>
+                            </div> -->
+                        </div>
+                        <div id="addImageButton" class=" w-40 h-24 flex hover:cursor-pointer  rounded-lg bg-slate-200 justify-center items-center">
+                            <i class="fa-solid fa-file-circle-plus fa-2xl"></i>
+                        </div>
+                    </div>
                 </div>
 
                 <div class=" form-control min-w-md max-w-md">
                     <label for="productCode" class="label">
                         <span class="label-text text-xl font-semibold">Product Unique Code?</span>
                     </label>
-                    <input id="productCode" type="text" placeholder="Type here" class="input input-bordered w-full " />
+                    <input disabled id="productCode" type="text" placeholder="Type here" class="input input-bordered w-full " />
                     <label for="productCode" class="label">
                         <span id="productCodeErrorText" class="label-text-alt text-red-400"></span>
                     </label>
@@ -109,10 +158,11 @@
                     </label>
                 </div>
                 <div class="form-control">
-                    <label for="productDescription" class="label"> 
+                    <label for="productDescription" class="label">
                         <span class="label-text text-xl font-semibold">Product Short Description?</span>
                     </label>
-                    <textarea maxlength="100" minlength="42" id="productDescription" onchange="loadProductPreview('productDescription','pDescription')"
+                    <textarea maxlength="100" minlength="42" id="productDescription"
+                        onchange="loadProductPreview('productDescription','pDescription')"
                         class="textarea textarea-bordered h-24" placeholder="Product description"></textarea>
                     <label for="productDescription" class="label">
                         <span id="productDescriptionErrorText" class="label-text-alt text-red-400"></span>
@@ -128,12 +178,13 @@
                     </figure>
                     <div class="card-body">
                         <h2 id="pName" class="w-max card-title">Product</h2>
-                        <p id="pDescription" class="max-w-full break-words max-h-[73.5px] ">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <p id="pDescription" class="max-w-full break-words max-h-[73.5px] ">Lorem ipsum dolor sit amet
+                            consectetur adipisicing elit.</p>
                         <h2 class="text-lg text-right font-semibold "> <span
                                 class="font-extrabold text-yellow-400 text-2xl">৳</span> <span id="pPrice">00</span> TK
                         </h2>
                         <div class="card-actions justify-end">
-                            <button  id="buyButton" class="btn btn-primary">Buy Now</button>
+                            <button id="buyButton" class="btn btn-primary">Buy Now</button>
                         </div>
                     </div>
                 </div>
@@ -145,18 +196,18 @@
         </div>
 
         <div class="flex justify-center items-center  gap-2 w-full my-7">
-            <button id="submitButton" class="btn btn-success w-max" type="submit">SUBMIT</button>
-            <button id="previewButton" class="btn btn-warning w-max" type="submit">Preview</button>
+            <button id="submitButton" class="btn btn-success w-max" type="submit">SAVE</button>
+            <button id="previewButton" class="btn btn-error w-max" type="submit">DELETE</button>
         </div>
 
         <!-- <button class="btn" onclick="my_modal_5.showModal()">open modal</button> -->
-        
+
 
     </main>
 
     <!-- scripting Links -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
-    <script src="./firebase.js"></script>
+    <script src="./edit.js"></script>
 </body>
 
 </html>

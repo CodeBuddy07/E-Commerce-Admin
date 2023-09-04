@@ -81,7 +81,7 @@ submitButton.addEventListener('click', function () {
 
                                                 if (ProductCodes.includes(productCode.value)) {
                                                     showAlert('Error Massage!', 'Product Key Already Used.Try Different Product Key', 'text-red-400')
-                                                    LoadingIcon.classList.replace('flex', 'hidden');
+                                                    setInterval(function () {LoadingIcon.classList.replace('hidden', 'flex');},7000);
                                                 } else {
 
                                                     firebase.database().ref("BlackPearl/" + productCode.value).set({
@@ -91,12 +91,13 @@ submitButton.addEventListener('click', function () {
                                                         Description: productDescription.value,
                                                     })
 
-                                                    
+
 
                                                     if (extraProductImage1.files[0] !== undefined) {
 
                                                         firebase.storage().ref("Product_Images/" + extraProductImage1.files[0].name).put(extraProductImage1.files[0]).then(function () {
                                                             firebase.storage().ref("Product_Images/" + extraProductImage1.files[0].name).getDownloadURL().then(function (url1) {
+                                                                
                                                                 firebase.database().ref("BlackPearl/" + productCode.value).update({
 
                                                                     ExtraImageURL1: url1,
@@ -105,13 +106,14 @@ submitButton.addEventListener('click', function () {
                                                         });
 
 
-                                                    }
+                                                    } 
 
 
                                                     if (extraProductImage2.files[0] !== undefined) {
 
                                                         firebase.storage().ref("Product_Images/" + extraProductImage2.files[0].name).put(extraProductImage2.files[0]).then(function () {
                                                             firebase.storage().ref("Product_Images/" + extraProductImage2.files[0].name).getDownloadURL().then(function (url2) {
+                                                                
                                                                 firebase.database().ref("BlackPearl/" + productCode.value).update({
 
                                                                     ExtraImageURL2: url2,
@@ -119,12 +121,13 @@ submitButton.addEventListener('click', function () {
                                                             })
                                                         });
 
-                                                    }
+                                                    } 
 
                                                     if (extraProductImage3.files[0] !== undefined) {
 
                                                         firebase.storage().ref("Product_Images/" + extraProductImage3.files[0].name).put(extraProductImage3.files[0]).then(function () {
                                                             firebase.storage().ref("Product_Images/" + extraProductImage3.files[0].name).getDownloadURL().then(function (url3) {
+                                                                
                                                                 firebase.database().ref("BlackPearl/" + productCode.value).update({
 
                                                                     ExtraImageURL3: url3,
@@ -132,11 +135,14 @@ submitButton.addEventListener('click', function () {
                                                             })
                                                         });
 
-                                                    }
-
+                                                    } 
+                                                        
                                                     showAlert('Successful!', 'Your Product Added Successfully To The Database', 'text-green-400');
-                                                    LoadingIcon.classList.replace('flex', 'hidden');
                                                     
+
+
+                                                    setInterval(function () {LoadingIcon.classList.replace('hidden', 'flex');},7000);
+
 
                                                 }
 
@@ -189,7 +195,7 @@ const getMeta = async (url) => {
     return img;
 };
 
-function Refresh(){
+function Refresh() {
     location.reload();
 }
 
@@ -256,10 +262,11 @@ previewButton.addEventListener('click', function (file) {
 
 
 function showAlert(title, massage, color) {
-    const AlertBox = document.createElement('dialog');
-    AlertBox.setAttribute('id', 'my_modal_5');
-    AlertBox.setAttribute('class', 'modal modal-bottom sm:modal-middle');
-    AlertBox.innerHTML = `
+    setInterval(function () {
+        const AlertBox = document.createElement('dialog');
+        AlertBox.setAttribute('id', 'my_modal_5');
+        AlertBox.setAttribute('class', 'modal modal-bottom sm:modal-middle');
+        AlertBox.innerHTML = `
 
             <form method="dialog" class="${color} modal-box">
                 <h3 class="font-bold text-lg">${title}</h3>
@@ -271,8 +278,10 @@ function showAlert(title, massage, color) {
             </form>
     
     `
-    document.getElementById('main').appendChild(AlertBox);
-    document.getElementById('my_modal_5').showModal();
+        document.getElementById('main').appendChild(AlertBox);
+        document.getElementById('my_modal_5').showModal();
+    }, 7000);
+
 }
 
 
